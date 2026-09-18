@@ -1,0 +1,21 @@
+{
+  "expo": {
+    "name": "ByggeMarked",
+    "slug": "byggemarked-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "backgroundColor": "#FFF7F0"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#FFF7F0"
+      }
+    }
+  }
+}
