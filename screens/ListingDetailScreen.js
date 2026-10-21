@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, ScrollView, Text, View } from 'react-native';
+import { Alert, Image, ScrollView, Text, View } from 'react-native';
 import { GlobalStyle } from '../styles/GlobalStyle';
 import { useListings } from '../context/ListingsContext';
 import PrimaryButton from '../components/PrimaryButton';
@@ -31,6 +31,7 @@ export default function ListingDetailScreen({ route }) {
 
   return (
     <ScrollView style={GlobalStyle.container} contentContainerStyle={GlobalStyle.screenPadding}>
+      {listing.photoUri && <Image source={{ uri: listing.photoUri }} style={GlobalStyle.photoPreview} />}
       <Text style={GlobalStyle.heading}>{listing.title}</Text>
       <Text style={[GlobalStyle.cardPrice, { fontSize: 22, marginBottom: 12 }]}>
         {listing.price === 0 ? 'Gratis' : `${listing.price} kr.`}

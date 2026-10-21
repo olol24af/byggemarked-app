@@ -160,6 +160,29 @@ export const GlobalStyle = StyleSheet.create({
     textAlignVertical: 'top',
   },
 
+  // Billeder (AddPhotoScreen, CreateListingScreen, ListingCard, ListingDetailScreen)
+  photoPreview: {
+    width: '100%',
+    aspectRatio: 4 / 3,
+    borderRadius: 12,
+    marginBottom: 12,
+    backgroundColor: COLORS.border,
+  },
+  photoPlaceholder: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderStyle: 'dashed',
+    borderColor: COLORS.textMuted,
+    backgroundColor: COLORS.card,
+  },
+  cardPhoto: {
+    width: '100%',
+    height: 140,
+    borderRadius: 10,
+    marginBottom: 10,
+  },
+
   // ProfileScreen
   profileHeader: {
     alignItems: 'center',

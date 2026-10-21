@@ -1,15 +1,46 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MATERIALS } from '../data/materials';
 
 // ListingsContext deler listen af annoncer mellem alle screens/tabs.
-// Det svarer til det, arrayet i data/materials.js ville gøre alene,
-// men gør det muligt for CreateListingScreen at LÆGGE nye annoncer ind,
-// som HomeScreen og ProfileScreen så med det samme kan vise.
+// Annoncerne gemmes lokalt på telefonen med AsyncStorage, så de nye annoncer
+// (og deres billeder) stadig er der, når appen lukkes og åbnes igen.
+// Første gang appen åbnes, er der ikke noget gemt, og så bruges eksempeldataene
+// fra data/materials.js som udgangspunkt.
+
+const STORAGE_KEY = 'byggemarked:listings';
 
 const ListingsContext = createContext(null);
 
 export function ListingsProvider({ children }) {
   const [listings, setListings] = useState(MATERIALS);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Hent gemte annoncer én gang, når appen starter
+  useEffect(() => {
+    async function loadListings() {
+      try {
+        const saved = await AsyncStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          setListings(JSON.parse(saved));
+        }
+      } catch (error) {
+        console.warn('Kunne ikke hente gemte annoncer', error);
+      } finally {
+        setIsLoaded(true);
+      }
+    }
+    loadListings();
+  }, []);
+
+  // Gem annoncerne hver gang listen ændrer sig. Vi venter til de gemte data er
+  // hentet, så vi ikke overskriver dem med eksempeldataene ved opstart.
+  useEffect(() => {
+    if (!isLoaded) return;
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(listings)).catch((error) =>
+      console.warn('Kunne ikke gemme annoncer', error)
+    );
+  }, [listings, isLoaded]);
 
   function addListing(newListing) {
     setListings((prev) => [

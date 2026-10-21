@@ -16,6 +16,15 @@
       "adaptiveIcon": {
         "backgroundColor": "#FFF7F0"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "ByggeMarked bruger dine billeder, så du kan vise materialet i din annonce.",
+          "cameraPermission": "ByggeMarked bruger kameraet, så du kan tage et billede af materialet til din annonce."
+        }
+      ]
+    ]
   }
 }

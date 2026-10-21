@@ -1,5 +1,5 @@
 import React from 'react';
-import { Pressable, Text, View } from 'react-native';
+import { Image, Pressable, Text, View } from 'react-native';
 import { GlobalStyle } from '../styles/GlobalStyle';
 
 // Ét element i FlatList'en på HomeScreen. At bryde det ud i sin egen
@@ -10,6 +10,7 @@ export default function ListingCard({ listing, onPress }) {
       style={({ pressed }) => [GlobalStyle.card, pressed && { opacity: 0.8 }]}
       onPress={onPress}
     >
+      {listing.photoUri && <Image source={{ uri: listing.photoUri }} style={GlobalStyle.cardPhoto} />}
       <View style={GlobalStyle.cardRow}>
         <Text style={GlobalStyle.cardTitle} numberOfLines={2}>
           {listing.title}
